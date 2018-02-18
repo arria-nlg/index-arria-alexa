@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "alexa": "0.0.1-e",
+    "alexa-sdk": "^1.0.25",
     "moment": "^2.20.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",

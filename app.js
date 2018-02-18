@@ -1,9 +1,13 @@
-var request = require('request-promise');
-var moment = require('moment');
+const Alexa = require('alexa-sdk'); // To interface with Alexa
+const request = require('request-promise'); // To handle REST requests
+const moment = require('moment'); // To handle dates
 
+//To configure
+const appID = 'amzn1.ask.skill.0d7a9607-c0fe-4818-af5a-eb0cd52c6be2';
 const nlgURL = 'https://app.studio.arria.com:443/alite_content_generation_webapp/text/OjLZAjplb5X';
 const nlgKey = 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJNcS10MDJ0bERLank2QlFsQ1U0amtsZGciLCJpYXQiOjE1MTg5MzE0MTIsImV4cCI6MTY3NjYxMTQxMiwiaXNzIjoiQUxpdGUiLCJzdWIiOiJ6TkI2eWxKcVpxWTMiLCJBTGl0ZS5wZXJtIjpbInByczp4Ok9qTFpBanBsYjVYIl0sIkFMaXRlLnR0IjoidV9hIn0.sVIy8tCvlJwFSxzPFkxCh-0aP8qMTMAHI2rYAcJCONJdP5EGlU74mxGjhZWLXlcrXm7cAfbapAK9V4s3ITRxTw';
 
+// Supported currencies
 const nameMap = {
                     USD : {
                         fullName : 'US Dollar',
@@ -24,6 +28,7 @@ const nameMap = {
                 };
                 
 const symbols = Object.keys(nameMap);
+
 
 var requests = {
     getTodaysData : function(currency){
@@ -111,22 +116,31 @@ var analysis = {
     }
 }
 
+
+
+const handlers = {
+    'CurrencyDescriptionIntent' : function(){
+        var reportCurrency = this.event.request.intent.slots.currency.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        console.log('Generating a report for ' + reportCurrency);
+
+        requests.getTodaysData(reportCurrency)
+        .then(todaysData => requests.addYesterdaysData(reportCurrency, todaysData))
+        .then(combinedData => analysis.collateData(reportCurrency, combinedData))
+        .then(data => analysis.analyseVariance(data))
+        .then(data => requests.generateNarrative(data))
+        .then(response => {
+            this.emit(':tell', response);
+        })
+        .catch(error => {
+            console.log(error);
+            return 'Exchange rate data is not available at this time. Please try again later.';
+        });
+    }
+};
+    
 exports.handler = (event, context, callback) => {
-    
-    var reportCurrency = event.request.intent.slots.currency.resolutions.resolutionsPerAuthority[0].values[0].value;
-    
-    console.log('Generating a report for ' + reportCurrency);
-    
-    requests.getTodaysData(reportCurrency)
-    .then(todaysData => requests.addYesterdaysData(reportCurrency, todaysData))
-    .then(combinedData => analysis.collateData(reportCurrency, combinedData))
-    .then(data => analysis.analyseVariance(data))
-    .then(data => requests.generateNarrative(data))
-    .then(response => {
-        callback(null, response);
-    })
-    .catch(error => {
-        console.log(error);
-        return 'Exchange rate data is not available at this time. Please try again later.';
-    });    
+    const alexa = Alexa.handler(event, context, callback);
+    alexa.appId = appID;
+    alexa.registerHandlers(handlers);
+    alexa.execute();        
 };
