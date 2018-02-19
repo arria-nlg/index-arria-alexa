@@ -120,21 +120,25 @@ var analysis = {
 
 const handlers = {
     'CurrencyDescriptionIntent' : function(){
-        var reportCurrency = this.event.request.intent.slots.currency.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        console.log('Generating a report for ' + reportCurrency);
+        if(this.event.request.intent.slots.currency.resolutions.resolutionsPerAuthority[0].status.code == 'ER_SUCCESS_NO_MATCH'){
+            this.emit(':tell', "I'm sorry, I don't know what currency " + this.event.request.intent.slots.currency.value + " are. Please try again.");
+        } else {
+            var reportCurrency = this.event.request.intent.slots.currency.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+            console.log('Generating a report for ' + reportCurrency);
 
-        requests.getTodaysData(reportCurrency)
-        .then(todaysData => requests.addYesterdaysData(reportCurrency, todaysData))
-        .then(combinedData => analysis.collateData(reportCurrency, combinedData))
-        .then(data => analysis.analyseVariance(data))
-        .then(data => requests.generateNarrative(data))
-        .then(response => {
-            this.emit(':tell', response);
-        })
-        .catch(error => {
-            console.log(error);
-            return 'Exchange rate data is not available at this time. Please try again later.';
-        });
+            requests.getTodaysData(reportCurrency)
+            .then(todaysData => requests.addYesterdaysData(reportCurrency, todaysData))
+            .then(combinedData => analysis.collateData(reportCurrency, combinedData))
+            .then(data => analysis.analyseVariance(data))
+            .then(data => requests.generateNarrative(data))
+            .then(response => {
+                this.emit(':tell', response);
+            })
+            .catch(error => {
+                console.log(error);
+                return 'Exchange rate data is not available at this time. Please try again later.';
+            });
+        }
     }
 };
     
