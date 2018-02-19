@@ -120,10 +120,13 @@ var analysis = {
 
 const handlers = {
     'CurrencyDescriptionIntent' : function(){
-        if(this.event.request.intent.slots.currency.resolutions.resolutionsPerAuthority[0].status.code == 'ER_SUCCESS_NO_MATCH'){
+        const currencySlot = this.event.request.intent.slots.currency;
+        if(currencySlot.resolutions == undefined){
+            this.emit(':tell', "I need to know what currency you are interested in. Please try again.");
+        } else if(currencySlot.resolutions.resolutionsPerAuthority[0].status.code == 'ER_SUCCESS_NO_MATCH'){
             this.emit(':tell', "I'm sorry, I don't know what currency " + this.event.request.intent.slots.currency.value + " are. Please try again.");
         } else {
-            var reportCurrency = this.event.request.intent.slots.currency.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+            var reportCurrency = currencySlot.resolutions.resolutionsPerAuthority[0].values[0].value.name;
             console.log('Generating a report for ' + reportCurrency);
 
             requests.getTodaysData(reportCurrency)
