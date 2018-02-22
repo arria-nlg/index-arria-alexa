@@ -78,11 +78,11 @@ exports.analysis = {
         for(var index in data.comparisons){
             var comparison = data.comparisons[index];
             comparison.change = comparison.today - comparison.yesterday;
-            comparison.changePercentage = comparison.change / comparison.yesterday;
+            comparison.changePercentage = comparison.change * 100.0 / comparison.yesterday;
             totalChangePercentage += comparison.changePercentage;
         }
         
-        data.averageChangePercentage = totalChangePercentage * 100.0 / data.comparisons.length;
+        data.averageChangePercentage = totalChangePercentage / data.comparisons.length;
         
         return data;
     }
