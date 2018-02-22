@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Arria Exchange Rate Narrative Generator</title>
+        <link rel="stylesheet" type="text/css" href="/style.css">
+  </head>
+  <body>
+    <!-- page content -->
+    <div id="banner">
+        <h2>Analysis View</h2>
+        <div id="selection">
+            <select required name="currency-list" id="currency-select">
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+                <option value="EUR">EUR</option>
+                <option value="JPY">JPY</option>
+            </select>            
+            <input id="currency-input" type="submit" onclick="getAnalysis(getCurrency())">
+        </div>
+        <a href="https://app.studio.arria.com">
+            <img src="images/Logo_PBArria_Grey1.png"/>
+        </a>
+    </div>
+    <div id="content-wrapper">
+        <div id="content">            
+            <div id="narrative"></div>
+            <div id="data">
+                <table id="data-table">
+                    <thead>
+                        <th>Currency</th>
+                        <th>Yesterday</th>
+                        <th>Today</th>
+                        <th>Variance</th>
+                        <th>Percentage Variance</th>
+                    </thead>
+                    <tbody id="table-content">
+                    </tbody>
+                </table>
+            </div>
+            <div id="graph"></div>
+        </div>
+    </div>
+    <div id="footer">
+        <a href="https://github.com/arria-nlg/index-arria-alexa" target="_blank">Fork this project on GitHub</a>
+    </div>
+  <!-- D3 for chart -->
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <!-- Application -->
+  <script src="/script/main.js"></script>
+  </body>
+</html>

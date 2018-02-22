@@ -1,0 +1,134 @@
+body {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+
+    display: flex;
+    flex-direction: column;
+    
+    font-family: sans-serif;
+}
+    
+#banner {
+    flex: 0 0 100px;
+    width: 100%;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    background-color: #152934;
+}
+
+#content-wrapper {
+    flex: 1 0 auto;
+    margin-bottom:50px;
+    
+    background-color: #ffffff;
+}
+
+#footer {
+    flex: 0 0 30px;
+    width: 100%;
+    
+    background-color: #152934;    
+    text-align:center;
+    padding-top:15px;
+}
+
+#banner > a {
+    padding-left:20px;
+    padding-right:20px;
+}
+
+#banner > h2 {
+    padding-left:20px;
+    padding-right:20px;
+    color:#ecf0f7;
+}
+
+#selection {
+    display: flex;
+}
+
+#currency-select {
+    height:2.5rem;
+    width:250px;
+    font-size: 16px;
+    
+    background-color:#ecf0f7;
+    font-weight: bold;
+    cursor:pointer;
+    color:#152934;
+}
+
+#currency-input {
+    height:2.5rem;
+    margin-left:20px;
+    font-size: 16px;
+    padding:0 1rem;
+    
+    background-color:#ecf0f7;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#content {
+    height: auto;
+    width: 100%;    
+}
+
+#narrative {
+    width: 90%;
+    margin-left: 5%;
+    margin-top:40px;
+    margin-bottom:40px;
+}
+
+table {
+    width: 90%;
+    margin-left: 5%;
+    padding-top: 10px;    
+    table-layout: fixed;
+    
+    display: none;
+    
+    font-size:14px;
+}
+
+tbody {
+    border: 1px solid #ffffff;
+}
+
+thead {
+    height: 30px;
+}
+
+th {
+    background-color: #3d70b2;
+    color: white;
+}
+
+td {    
+    background-color: #ecf0f7;
+}
+
+td, th {    
+    height: 30px;
+    padding: 8px;
+    
+    border: 1px solid #ffffff;
+    word-wrap: break-word;
+}
+
+#graph {
+    width:90%;
+    margin-left:5%;
+    padding-top: 10px;
+    
+}
+#footer a{
+    color: #ffffff;    
+    font-size:14px;
+}
