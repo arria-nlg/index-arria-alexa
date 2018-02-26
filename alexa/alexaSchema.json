@@ -1,0 +1,94 @@
+{
+    "languageModel": {
+        "invocationName": "arria",
+        "intents": [
+            {
+                "name": "AMAZON.CancelIntent",
+                "slots": [],
+                "samples": []
+            },
+            {
+                "name": "AMAZON.HelpIntent",
+                "slots": [],
+                "samples": []
+            },
+            {
+                "name": "AMAZON.StopIntent",
+                "slots": [],
+                "samples": []
+            },
+            {
+                "name": "CurrencyDescriptionIntent",
+                "slots": [
+                    {
+                        "name": "currency",
+                        "type": "currency"
+                    }
+                ],
+                "samples": [
+                    "how {currency} is doing",
+                    "about {currency}",
+                    "about the {currency}",
+                    "how the {currency} is doing",
+                    "about the {currency} today",
+                    "how the {currency} is doing today",
+                    "how {currency} are doing today",
+                    "how {currency} is doing today"
+                ]
+            }
+        ],
+        "types": [
+            {
+                "name": "currency",
+                "values": [
+                    {
+                        "id": "",
+                        "name": {
+                            "value": "USD",
+                            "synonyms": [
+                                "dollar",
+                                "dollars",
+                                "American dollars",
+                                "American dollar",
+                                "US dollar",
+                                "US dollars"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "",
+                        "name": {
+                            "value": "GBP",
+                            "synonyms": [
+                                "pound",
+                                "pounds",
+                                "British pounds",
+                                "British pound"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "",
+                        "name": {
+                            "value": "EUR",
+                            "synonyms": [
+                                "euro",
+                                "euros"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "",
+                        "name": {
+                            "value": "JPY",
+                            "synonyms": [
+                                "yen",
+                                "Japanese yen"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
