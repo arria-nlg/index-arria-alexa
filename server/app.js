@@ -1,7 +1,4 @@
 var express = require('express');
-// var request = require( 'request-promise' );
-// var vcapServices = require('vcap_services');
-// var jsonfile = require( 'jsonfile' );
 var parser = require( 'body-parser' );
 
 const port = 3000;
@@ -18,12 +15,11 @@ app.use( parser.urlencoded( {
 
 // Per-request actions - load up the config
 app.use( function( req, res, next ) {
-	// Just keep swimming
 	next();
 } );
 
 // Static for main files
-app.use( '/', express.static( 'public' ) );
+app.use( '/', express.static( 'public' , {index: "textView.html"}) );
 
 // backend routes
 app.use( '/api', require( './api' ) );
