@@ -7,7 +7,11 @@ exports.requests = {
         return request({
             url: 'https://data.fixer.io/api/latest?base=' + currency + '&symbols=' + config.symbols + '&access_key=' + config.fixerKey,
             transform: function (body) {
-                return JSON.parse(body).rates;
+                if(JSON.parse(body).success){                    
+                    return JSON.parse(body).rates;
+                } else {
+                    throw new Error('Could not access the fixer.io service.');
+                }
             }
         });
     },
@@ -16,10 +20,14 @@ exports.requests = {
         return request({
             url: 'https://data.fixer.io/api/' + date + '?base=' + currency + '&symbols=' + config.symbols + '&access_key=' + config.fixerKey,
             transform: function (body) {
-                return {
-                    today: todayData,
-                    yesterday: JSON.parse(body).rates
-                };
+                if(JSON.parse(body).success){                                
+                    return {
+                        today: todayData,
+                        yesterday: JSON.parse(body).rates
+                    };
+                } else {
+                    throw new Error('Could not access the fixer.io service.');
+                }
             }
         });
     },
@@ -43,8 +51,11 @@ exports.requests = {
                 'content-type': 'application/json'
             },
             transform: function (body) {
-                console.log(body);
-                return JSON.parse(body)[0].result;
+                if(body){
+                    return JSON.parse(body)[0].result;
+                } else {
+                    throw new Error("Could not access the NLG Studio API.");
+                }
             }
         });    
     }
