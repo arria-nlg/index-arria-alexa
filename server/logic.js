@@ -5,7 +5,7 @@ const moment = require('moment'); // To handle dates
 exports.requests = {
     getTodaysData : function(currency){
         return request({
-            url: 'https://api.fixer.io/latest?base=' + currency + '&symbols=' + config.symbols,
+            url: 'https://data.fixer.io/api/latest?base=' + currency + '&symbols=' + config.symbols + '&access_key=' + config.fixerKey,
             transform: function (body) {
                 return JSON.parse(body).rates;
             }
@@ -14,7 +14,7 @@ exports.requests = {
     addYesterdaysData : function(currency, todayData){
         var date = moment().subtract(1, 'days').format('YYYY-MM-DD');
         return request({
-            url: 'https://api.fixer.io/' + date + '?base=' + currency + '&symbols=' + config.symbols,
+            url: 'https://data.fixer.io/api/' + date + '?base=' + currency + '&symbols=' + config.symbols + '&access_key=' + config.fixerKey,
             transform: function (body) {
                 return {
                     today: todayData,
