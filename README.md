@@ -76,6 +76,34 @@ The app also has separate pages showing how applications can be built up using d
 
 ## Launching the Alexa Skill
 
+Using the same backed Studio project and backend server logic, we can launch an Alexa Skill that calls an AWS Lamda function. This requires an [AWS developer account](https://console.aws.amazon.com/console/home), and an [Alexa developer account](https://developer.amazon.com/alexa). You will need to switch back and forwards between the two.
+
+### Initialising the Alexa Skill
+Start by going in to the [Alexa developer account](https://developer.amazon.com/alexa) and open up the new skills console. 
+<p align="center">
+  <img width="800"  src="readme_images/skills_console.png">
+</p>
+
+From the console you need to select **New skill**.
+<p align="center">
+  <img width="800"  src="readme_images/new_skill.png">
+</p>
+
+Name your skill and hit **Next** (it may take a while to load). This application uses a custom interaction model, which means you will choose what the user can say. Click **Create skill**.
+
+Skills are built around an interaction model, which controls what a user can say and what will be passed through to the server handling processing. To get you started we have provided you with a basic interaction model in the `alexa/alexaSchema.json` file. Select JSON Editor from the menu on the left. Drag the `alexa/alexaSchema.json` file on the space provided.
+
+The only choice you need to make with this schema is what you are going to call you application. Change the `invocationName` property at the top from `arria` to your app's name. In this explanation we will assume you chose the name `currency narrator`. Alexa recommends names with 2-3 words, all lower case.
+
+Click `Save Model` then `Build Model`. These configure the settings according to the schema. Building may take a minute or two.
+
+The Alexa skill will need to call a server as an endpoint. This endpoint will in turn needs to know which skills are allowed to call it. For that, go back to the [skills console main menu](https://developer.amazon.com/alexa/console/ask) and click **View Skill ID** underneath your skill name. Save the skill ID somewhere for later.
+
+### Setting up the Lambda Function
+Alexa recommends using a Lambda Function to host the service.  
+
+### Connecting Alexa to the Function
+
 # How It Works
 
 # Support
