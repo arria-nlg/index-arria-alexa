@@ -9,7 +9,7 @@ exports.nlgKey = 'TODO';
 // The API key to access Fixer.io
 exports.fixerKey = 'TODO';
 
-// The ID of your Alexa Skill. Optional.
+// The ID of your Alexa Skill. Will be filled in when setting up Alexa.
 exports.appID = 'TODO';
 
 // Supported currencies
