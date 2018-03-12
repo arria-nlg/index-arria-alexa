@@ -33,7 +33,6 @@ const handlers = {
     
 exports.handler = (event, context, callback) => {
     const alexa = Alexa.handler(event, context, callback);
-    alexa.appId = config.appID;
     alexa.registerHandlers(handlers);
     alexa.execute();        
 };
