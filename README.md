@@ -69,10 +69,10 @@ The `app.js` script will run the webapp on `port 3000`, so you should be able to
 If you don't have a `config.js` file, it will declare that it "Cannot find module './config'". If you have the file but haven't added your credentials, the app will show an error message describing which service has an issue.
 
 The app also has separate pages showing how applications can be built up using different presentation techniques:
-1 [DataView](http://localhost:3000/dataView.html) just displays the raw data in a table
-2 [AnalysisView](http://localhost:3000/analysisView.html) shows the analysed in a table
-3 [VisualisationView](http://localhost:3000/visualizationView.html) adds a chart representing the data
-4 [TextView](http://localhost:3000/textView.html) uses our NLG Studio to explain exactly what is going on
+1. [DataView](http://localhost:3000/dataView.html) just displays the raw data in a table
+2. [AnalysisView](http://localhost:3000/analysisView.html) shows the analysed in a table
+3. [VisualisationView](http://localhost:3000/visualizationView.html) adds a chart representing the data
+4. [TextView](http://localhost:3000/textView.html) uses our NLG Studio to explain exactly what is going on
 
 ## Launching the Alexa Skill
 
