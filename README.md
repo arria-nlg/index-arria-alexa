@@ -70,7 +70,7 @@ If you don't have a `config.js` file, it will declare that it "Cannot find modul
 
 The app also has separate pages showing how applications can be built up using different presentation techniques:
 1. [DataView](http://localhost:3000/dataView.html) just displays the raw data in a table
-2. [AnalysisView](http://localhost:3000/analysisView.html) shows the analysed in a table
+2. [AnalysisView](http://localhost:3000/analysisView.html) shows the analysed data in a table
 3. [VisualisationView](http://localhost:3000/visualizationView.html) adds a chart representing the data
 4. [TextView](http://localhost:3000/textView.html) uses our NLG Studio to explain exactly what is going on
 
