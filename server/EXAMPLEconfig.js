@@ -1,16 +1,16 @@
 // These values should be changed based on your local setup.
 
-// The API key to access Fixer.io
-exports.fixerKey = 'TODO';
-
-// The ID of your Alexa Skill
-exports.appID = 'TODO';
-
 // The URL your Studio project is deployed at
 exports.nlgURL = 'TODO';
 
 // The API key for your Studio project
 exports.nlgKey = 'TODO';
+
+// The API key to access Fixer.io
+exports.fixerKey = 'TODO';
+
+// The ID of your Alexa Skill. Optional.
+exports.appID = 'TODO';
 
 // Supported currencies
 exports.nameMap = {
