@@ -170,7 +170,12 @@ When you are happy with you Skill you can use the **Launch** tab at the top to r
 # How It Works
 
 ## The Studio Project
+The NLG Studio project in this example is a simple one designed to say how a currency is doing. The main script decides whether the day has been a good day, a bad day, or a mediocre day. This decision is made by assessing the average percentage change between yesterday and today across the comparison currencies. The averagePercentageChange is compared with the StableThreshold variable before calling the relevant subscript.
 
+The three GoodDay/BadDay/MediocreDay scripts are all quite similar. They each give a general state, and then discuss the various currencies. The scripts differ based on the order they discuss currencies, and how they are introduced. For example, on a good day, currencies where the exchange rate has gone up will come first. On a bad day, any currencies which bucked the trend and went up will be described second. 
+
+Each currency is described using the ExchangeRateDescription script. This takes in a currency and reports on the current exchange rate.
+  
 ## Connecting to Studio using Node.js
 
 ## The Webapp
