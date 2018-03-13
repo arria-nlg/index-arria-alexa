@@ -5,6 +5,14 @@ The narrative itself is a simple report that describes how a currency is doing a
 
 This project was used as part of the [Index 2018](https://developer.ibm.com/indexconf/) conference.
 
+# Architecture
+
+<p align="center">
+  <img width="800"  src="readme_images/architecture.png">
+</p>
+
+This project is able to used as both a web application and an Alexa application. In each case, there's the same underlying system - a node.js server which calls out to an [NLG Studio](https://app.studio.arria.com) project and the [Fixer.io](https://fixer.io/) api. The web application calls the server directly, while Alexa calls an Alexa Skill. This Skill calls the server (hosted using AWS Lambda).
+
 # Usage
 
 ## Deploying Narratives with NLG Studio
@@ -102,14 +110,14 @@ The Alexa skill will need to call a server as an endpoint. This endpoint will in
 ### Setting up the Lambda Function
 Amazon recommends using a Lambda Function to host services for Alexa. Log in to the [AWS developer console](https://console.aws.amazon.com/console/home) and select Lambda from the list of services. 
 <p align="center">
-  <img width="600"  src="readme_images/lambda_location.png">
+  <img width="400"  src="readme_images/lambda_location.png">
 </p>
 
 Click **Create function** and use **Author from scratch**. Choose your own name for the function, and make sure the Runtime is `Node.js 6.10`. 
 
 For the Role, choose `Create a new role from template(s)`. Name your role (e.g. alexaSkillRole) and choose `Simple Microservice permissions` in Policy templates. Click **Create function** once you are happy.
 
-Once the function is created, you now need to configure it. First we need to link the function to Alexa. In the **Designer** pane add the `Alexa Skills Kit` trigger. 
+When the function is created, you need to configure it. First, you need to link the function to Alexa. In the **Designer** pane add the `Alexa Skills Kit` trigger. 
 <p align="center">
   <img width="800"  src="readme_images/alexa_trigger.png">
 </p>
@@ -160,6 +168,14 @@ If you are typing, you need to make sure that you use the same capitalization as
 When you are happy with you Skill you can use the **Launch** tab at the top to release it, or test it with beta users.
 
 # How It Works
+
+## The Studio Project
+
+## Connecting to Studio using Node.js
+
+## The Webapp
+
+## The Alexa Handler
 
 # Support
 For any help on how to build projects using NLG Studio please contact us at support@arrianlg.studio
