@@ -41,7 +41,7 @@ You can now call your Studio project using that URL and API key. You will need t
 
 ## Configuring the Back End
 
-To connect the NLG Studio endpoint to the data, we are going to use a simple [node.js](https://nodejs.org/en/) back end. This server has endpoints that allow both Amazon Alexa and a web application to generate output.
+To connect the NLG Studio endpoint to the data, you are going to use a simple [node.js](https://nodejs.org/en/) back end. This server has endpoints that allow both Amazon Alexa and a web application to generate output.
 
 The server is controlled through a file called `server/config.js`, which you need to create. This file contains the URLs and API keys that are specific to your personal deployment. We have created an example file called `server/EXAMPLEconfig.js`.
 
@@ -84,7 +84,7 @@ Start by going in to the [Alexa developer account](https://developer.amazon.com/
   <img width="800"  src="readme_images/skills_console.png">
 </p>
 
-From the console you need to select **New skill**.
+From the console you need to select **Create Skill**.
 <p align="center">
   <img width="800"  src="readme_images/new_skill.png">
 </p>
@@ -97,12 +97,67 @@ The only choice you need to make with this schema is what you are going to call 
 
 Click `Save Model` then `Build Model`. These configure the settings according to the schema. Building may take a minute or two.
 
-The Alexa skill will need to call a server as an endpoint. This endpoint will in turn needs to know which skills are allowed to call it. For that, go back to the [skills console main menu](https://developer.amazon.com/alexa/console/ask) and click **View Skill ID** underneath your skill name. Save the skill ID somewhere for later.
+The Alexa skill will need to call a server as an endpoint. This endpoint will in turn needs to know which Skills are allowed to call it. For that, go back to the [skills console main menu](https://developer.amazon.com/alexa/console/ask) and click **View Skill ID** underneath your skill name. Save the skill ID somewhere for later.
 
 ### Setting up the Lambda Function
-Alexa recommends using a Lambda Function to host the service.  
+Amazon recommends using a Lambda Function to host services for Alexa. Log in to the [AWS developer console](https://console.aws.amazon.com/console/home) and select Lambda from the list of services. 
+<p align="center">
+  <img width="600"  src="readme_images/lambda_location.png">
+</p>
+
+Click **Create function** and use **Author from scratch**. Choose your own name for the function, and make sure the Runtime is `Node.js 6.10`. 
+
+For the Role, choose `Create a new role from template(s)`. Name your role (e.g. alexaSkillRole) and choose `Simple Microservice permissions` in Policy templates. Click **Create function** once you are happy.
+
+Once the function is created, you now need to configure it. First we need to link the function to Alexa. In the **Designer** pane add the `Alexa Skills Kit` trigger. 
+<p align="center">
+  <img width="800"  src="readme_images/alexa_trigger.png">
+</p>
+
+In the **Configure triggers** pane, you need to tell the Lambda function to accept requests from your Alexa skill. Copy your Alexa Skill ID in to the box provided and click **Add**. If you have lost the Skill ID, go back to the [skills console main menu](https://developer.amazon.com/alexa/console/ask) and click **View Skill ID** underneath your skill name.
+
+Now we need to configure the function code itself. In the **Designer** pane, click the name of your function to select it.
+<p align="center">
+  <img width="800"  src="readme_images/function_designer.png">
+</p>
+
+The **Function code** pane controls what will run when the Lambda function is executed. The Handler controls which part of your code will be called. Change the name to `alexa.handler`. This means that the `handler` function inside `alexa.js` will be used.
+
+Now you need to upload the server code as a zip file. Zip the contents of the `server` folder. Make sure that the zip file only contains the contents, and not the `server` folder itself. In the **Function code** pane select the Code entry type of `Upload a .ZIP file` and upload your zip file.
+
+Finally, click the **Save** button at the top of the screen. It may take some time to build.
+
+You have now set up the Lambda function.
 
 ### Connecting Alexa to the Function
+At this stage you have an Alexa skill and a Lambda function which can accept calls from that skill. However, the Alexa skill doesn't know what to do when it is invoked.
+
+From the Lambda function console, copy the ARN at the very top of the page. This is the unique reference for your Lambda function.
+
+Switch to the Alexa developer console and edit your Skill. From the menu on the left, select **Endpoint**. When Alexa is invoked it will parse the request and send a JSON payload to the Endpoint.
+
+Select **AWS Lambda ARN**, then paste your Lambda function's ARN in the Default Region box.
+
+Click **Save Endpoints** at the top of the screen. You have now set everything up for your Alexa Skill!
+
+### Testing Your Skill
+To check that everything is working, go to the **Test** tab at the top of the screen.
+
+Each Skill starts with testing disable. Enable testing by flipping the switch at the top. This initializes the testing interface.
+
+From here you can test your Skill by either typing queries or using your microphone.
+
+Try using some of the following commands, supplying your invocation name as appropriate:
+
+*Alexa, ask ___________ about the Pound*
+
+*Alexa, ask ___________ how the Dollar is doing*
+
+*Alexa, ask ___________ about Japanese Yen*
+
+If you are typing, you need to make sure that you use the same capitalization as you used in your invocation name. If it can't find the invocation name it will say "Sorry, I don't know that one".
+
+When you are happy with you Skill you can use the **Launch** tab at the top to release it, or test it with beta users.
 
 # How It Works
 
